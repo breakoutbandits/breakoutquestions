@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Parent Page</title>
 </head>
 <body>
-    <iframe src="https://www.breakoutbandits.com/breakout-questions/" id="breakoutIframe" width="100%" height="600"></iframe>
+    <iframe src="https://www.breakoutbandits.com/breakout-questions/" id="breakoutIframe" width="100%" height="100%"></iframe>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            console.log("Pagina geladen");
-
-            // Haal de waarde van de parameter "id" uit de URL
-            var urlParams = new URLSearchParams(window.location.search);
-            var idParameter = urlParams.get("id");
-            console.log("Opgehaalde parameterwaarde: " + idParameter);
-
-            // Plaats de idParameter in het veld "Team ID" van het iframe
             var iframe = document.getElementById("breakoutIframe");
             iframe.onload = function() {
-                console.log("Iframe geladen");
-                var teamIdInput = iframe.contentDocument.getElementById("input_74_54");
-                if (teamIdInput) {
-                    teamIdInput.value = idParameter || ''; // Gebruik de parameterwaarde, of leeg als de parameter ontbreekt
-                    console.log("Parameterwaarde in het veld 'Team ID' ingesteld: " + idParameter);
-                } else {
-                    console.log("Veld 'Team ID' niet gevonden in het iframe.");
-                }
+                // Haal de waarde van de parameter "id" uit de URL
+                var urlParams = new URLSearchParams(window.location.search);
+                var idParameter = urlParams.get("id");
+
+                // Stuur de parameter "id" naar het iframe
+                iframe.contentWindow.postMessage(idParameter, "https://www.breakoutbandits.com/breakout-questions/");
             };
+        });
+
+        // Luister naar berichten van het iframe
+        window.addEventListener("message", function(event) {
+            // Controleer of het bericht afkomstig is van het verwachte domein
+            if (event.origin === "https://www.breakoutbandits.com") {
+                // Bericht ontvangen van het iframe
+                console.log("Ontvangen bericht van iframe: " + event.data);
+            }
         });
     </script>
 </body>
