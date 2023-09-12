@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout Questions</title>
+</head>
+<body>
+    <iframe src="https://www.breakoutbandits.com/breakout-questions/" id="breakoutIframe" width="100%" height="600"></iframe>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Haal de waarde van de parameter "id" uit de URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var idParameter = urlParams.get("id");
+
+            // Plaats de idParameter in het veld "Team ID" van het iframe
+            var iframe = document.getElementById("breakoutIframe");
+            iframe.onload = function() {
+                var teamIdInput = iframe.contentDocument.getElementById("input_74_54");
+                if (teamIdInput) {
+                    teamIdInput.value = idParameter || ''; // Gebruik de parameterwaarde, of leeg als de parameter ontbreekt
+                }
+            };
+        });
+    </script>
+</body>
+</html>
