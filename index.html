@@ -18,12 +18,14 @@
                 console.log(idParameter);
 
                 // Voeg een vertraging toe tussen het laden van het iframe en het verzenden van het bericht
-                setTimeout(function() {
+                //setTimeout(function() {
                     // Stuur de parameter "id" naar het iframe
                     iframe.contentWindow.postMessage(idParameter, "https://www.breakoutbandits.com/breakout-questions/");
-                }, 3000); // Wacht 1 seconde voordat het bericht wordt verzonden
+                //}, 3000); // Wacht 3 seconde voordat het bericht wordt verzonden
             };
-        });
+        });        
+
+
 
         // Luister naar berichten van het iframe
         window.addEventListener("message", function(event) {
